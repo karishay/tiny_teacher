@@ -1,0 +1,21 @@
+{
+    "activity": {
+        "settings": {
+            "preset": [],
+            "display_data": {
+                "initial_velocity": true,
+                "time": true,
+                "distance": false,
+                "deceleration": false
+            },
+            "table_data": {
+                "initial_velocity": true,
+                "time": false,
+                "distance": true,
+                "deceleration": false
+            },
+            "include_blank_columns": false,
+            "display_best_fit": false
+        }
+    }
+}
