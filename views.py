@@ -1,12 +1,12 @@
 from flask import Flask, render_template
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 
-#import config
+import config
 import forms
 import model
 
 app = Flask(__name__)
-#app.config.from_object(config)
+app.config.from_object(config)
 
 ###============= Login ==============###
 
@@ -33,6 +33,26 @@ def index():
 def login():
   return render_template("login.html")
 
+# @app.route('/login', methods=["POST"])
+# def authenticate():
+#   form = forms.LoginForm(request.form)
+#   if not form.validate():
+#     flash("Email or Password incorrect")
+#     return render_template("login.html")
+#
+#   email = form.email.data
+#   password = form.password.data
+#
+#   user = User.query.filter_by(email=email).first()
+#
+#   if not user or no user.authenticate(password):
+#     flash("Email or Password incorrect")
+#     return render_template("login.html")
+#
+#   login_user(user)
+#   return redirect(request.args.get("next", url_for("index")))
+
+
 ###=========== API endpoints ===========###
 
 
@@ -49,5 +69,6 @@ def activity_json():
 ###=====================================###
 
 
+
 if __name__ == "__main__":
-  app.run()
+  app.run(debug=True)
