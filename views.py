@@ -33,6 +33,10 @@ def index():
 def login():
   return render_template("login.html")
 
+@app.route('/register')
+def register():
+  return render_template("registration.html")
+
 # @app.route('/login', methods=["POST"])
 # def authenticate():
 #   form = forms.LoginForm(request.form)
