@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 
 import config
@@ -30,12 +30,35 @@ def index():
   return render_template("index.html")
 
 @app.route('/login')
-def login():
+def login_template():
   return render_template("login.html")
 
 @app.route('/register')
-def register():
+def register_template():
   return render_template("registration.html")
+
+@app.route('/register', methods=["POST"])
+def register():
+  #get the values from the forms
+  form = request.form
+
+  f = request.form
+  for key in f.keys():
+      for value in f.getlist(key):
+          print key,":",value
+
+
+  _name = form["name"]
+  _email = form["email"]
+  _password = form["password"]
+  _school = form["school"]
+  _class_subject = form["class_subject"]
+
+  #build the node
+  model.register_teacher(_name, _email, _password, _school, _class_subject)
+
+  #return login page
+  return render_template('login.html')
 
 # @app.route('/login', methods=["POST"])
 # def authenticate():

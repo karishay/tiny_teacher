@@ -1,9 +1,11 @@
 {% extends "login.html" %}
 {% block body %}
 <form method="post">
+  <input type="text" name="email" placeholder="Email"><br>
+  <input type="password" name="password" placeholder="Password"><br>
   <input type="text" name="name" placeholder="Full Name"><br>
   <input type="text" name="school" placeholder="School"><br>
-  <input type="text" name="classSubject" placeholder="Class Subject"><br>
+  <input type="text" name="class_subject" placeholder="Class Subject"><br>
   <input type="submit">
 </form>
 {% endblock %}

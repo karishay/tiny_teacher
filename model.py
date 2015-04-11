@@ -1,31 +1,23 @@
-from py2neo import Graph, Node, Relationship, watch
+import config
+from py2neo import Graph, Node, Relationship, watch, authenticate
+authenticate("localhost:7474", config.DATABASE_USER_NAME, config.DATABASE_PASSWORD)
 graph = Graph()
 
 #for debugging
 watch("httpstream")
 
-# from py2neo import neo4j
-# from py2neo import node, rel, ogm
-
-# from py2neo import cypher
-
-#
-# graph_db = neo4j.GraphDatabaseService("http://localhost:7476/db/data/")
-# store = ogm.Store(graph_db)
-
 
 ###============ Nodes and Relationship Creation ===============###
 
 
-# def register(email, password):
-
-
-# def LoginOrRegister(email, password):
-#   """ Description: If user exists, log in, if not, create new user.
-#       Params: email and password from login form
-#       Returns: user ID string """
-#
-#       teachers = graph_db.get_or_create_index(neo4j.Node, "Teachers")
-#       possibleTeacher = teachers.get("email", email)
-#       if possibleTeacher:
-#         return possibleTeacher[0]._properties
+def register_teacher(name, email, password, school, class_subject):
+  """ Description: for new teacher, create new teacher node
+      Params: name, email, password, school, class_subject from registration forms
+      Returns: true if correctly added to graph"""
+  new_teacher = Node("Teacher", name=name,
+                      email=email,
+                      password=password,
+                      school=school,
+                      class_subject=class_subject)
+  graph.create(new_teacher)
+  return new_teacher.exists
