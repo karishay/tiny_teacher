@@ -1,26 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, flash, redirect, url_for
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 
+import os
 import config
 import forms
 import model
 
 app = Flask(__name__)
 app.config.from_object(config)
-
-###============= Login ==============###
-
-# login_manager = LoginManager()
-# login_manager.init_app(app)
-# login_manager.login_view = "login"
-#
-# @login_manager.user_loader
-# def load_user(user_id):
-#   #if this queries User table, wont it be Model.user?
-#   return User.query.get(user_id)
-
-###=====================================###
-###=====================================###
 
 
 ###========= Teacher Interface =========###
@@ -31,6 +18,8 @@ def index():
 
 @app.route('/login')
 def login_template():
+  #TODO: add validation and login functionality
+  #TODO: redirect to post teacher dashboard
   return render_template("login.html")
 
 @app.route('/register')
@@ -39,14 +28,8 @@ def register_template():
 
 @app.route('/register', methods=["POST"])
 def register():
-  #get the values from the forms
+  #TODO: add error handling and validation
   form = request.form
-
-  f = request.form
-  for key in f.keys():
-      for value in f.getlist(key):
-          print key,":",value
-
 
   _name = form["name"]
   _email = form["email"]
@@ -54,11 +37,10 @@ def register():
   _school = form["school"]
   _class_subject = form["class_subject"]
 
-  #build the node
   model.register_teacher(_name, _email, _password, _school, _class_subject)
 
-  #return login page
-  return render_template('login.html')
+  flash("Sucessfully Registered, please log in with credentials now")
+  return redirect(url_for('login_template'))
 
 # @app.route('/login', methods=["POST"])
 # def authenticate():
