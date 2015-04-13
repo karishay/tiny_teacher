@@ -18,8 +18,19 @@ def index():
 
 @app.route('/login')
 def login_template():
-  #TODO: add validation and login functionality
-  #TODO: redirect to post teacher dashboard
+  return render_template("login.html")
+
+@app.route('/login', methods=["POST"])
+def login():
+  #TODO: add validation 
+  form = request.form
+  email = form["email"]
+  password = form["password"]
+
+  login = model.authenticate(email, password)
+  if login:
+    return redirect(url_for("dashboard"))
+  flash("Password and Email invalid. Sucks to be you.")
   return render_template("login.html")
 
 @app.route('/register')
@@ -31,36 +42,20 @@ def register():
   #TODO: add error handling and validation
   form = request.form
 
-  _name = form["name"]
-  _email = form["email"]
-  _password = form["password"]
-  _school = form["school"]
-  _class_subject = form["class_subject"]
+  name = form["name"]
+  email = form["email"]
+  password = form["password"]
+  school = form["school"]
+  class_subject = form["class_subject"]
 
-  model.register_teacher(_name, _email, _password, _school, _class_subject)
+  model.register_teacher(name, email, password, school, class_subject)
 
   flash("Sucessfully Registered, please log in with credentials now")
   return redirect(url_for('login_template'))
 
-# @app.route('/login', methods=["POST"])
-# def authenticate():
-#   form = forms.LoginForm(request.form)
-#   if not form.validate():
-#     flash("Email or Password incorrect")
-#     return render_template("login.html")
-#
-#   email = form.email.data
-#   password = form.password.data
-#
-#   user = User.query.filter_by(email=email).first()
-#
-#   if not user or no user.authenticate(password):
-#     flash("Email or Password incorrect")
-#     return render_template("login.html")
-#
-#   login_user(user)
-#   return redirect(request.args.get("next", url_for("index")))
-
+@app.route('/dashboard')
+def dashboard():
+  return "logged in yay"
 
 ###=========== API endpoints ===========###
 
@@ -80,4 +75,4 @@ def activity_json():
 
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(debug=True, port=5050)

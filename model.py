@@ -21,3 +21,19 @@ def register_teacher(name, email, password, school, class_subject):
                       class_subject=class_subject)
   graph.create(new_teacher)
   return new_teacher.exists
+
+
+###============ Nodes and Relationship Access ===============###
+
+def authenticate(email, password):
+  """ Description: Validates and authenticates email and password combinations
+                   by checking against database
+      Params: Email and Password from form
+      Returns: boolean """
+
+  teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='" + email + "' AND n.password ='" + password + "'  RETURN n")
+  if teacher_node.records:
+    print "OMG there is a node with that password and email!"
+    return True
+  print "Whoops, empty records. You do not exist"
+  return False
