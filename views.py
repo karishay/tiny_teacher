@@ -57,9 +57,13 @@ def register():
 def dashboard():
   return render_template("dashboard.html")
 
-@app.route('/activity_settings')
+@app.route('/activity_settings', methods=["GET"])
 def activity_settings():
-  return "This is where you will set up activities"
+  activities={"Phone Push":
+        "Ever wanted to push your phone? There's an app for that!", "Nic is Awesome":
+        "This activity proves scientifically the objective awesomeness that is Nic",
+        "Operation Badass": "If I told you the description of this activity I'd have to kill you."}
+  return render_template("activity_settings.html", activities=activities)
 
 @app.route('/student_results')
 def student_results():

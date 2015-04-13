@@ -2,14 +2,14 @@
 {% block body %}
 <div>
   <h3>Welcome back, {{ name }}!</h3>
-  <h4> What would you like to do? </h4>
+  <h3> What would you like to do? </h3>
   <div class="medium primary btn">
-  <a href="{{ url_for('activity_settings') }}">Prepare an Activity</a>
-</div>
-<div class="medium primary btn">
-  <a href="{{ url_for('student_results') }}">Review Student Results</a>
-</div>
-<div class="medium primary btn">
-  <a href="https://www.youtube.com/watch?v=M-P3l9ezaF8">See a Cat Video</a>
+    <a href="{{ url_for('activity_settings') }}">Prepare an Activity</a>
+  </div>
+  <div class="medium primary btn">
+    <a href="{{ url_for('student_results') }}">Review Student Results</a>
+  </div>
+  <div class="medium primary btn">
+    <a href="https://www.youtube.com/watch?v=M-P3l9ezaF8">Watch a Cat Video</a>
 
 {% endblock %}

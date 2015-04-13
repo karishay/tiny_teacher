@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h2> What activity would you like to prepare? </h2>
+<br>
+  {% for key, value in activities.iteritems() %}
+  <div class="large primary btn">
+    <a href="{{ key }}">{{ key }} </a>
+  </div>
+    <p> {{ value }} </p>
+  {% endfor %}
+{% endblock %}
