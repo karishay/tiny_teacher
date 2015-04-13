@@ -22,14 +22,14 @@ def login_template():
 
 @app.route('/login', methods=["POST"])
 def login():
-  #TODO: add validation 
+  #TODO: add validation
   form = request.form
   email = form["email"]
   password = form["password"]
 
-  login = model.authenticate(email, password)
-  if login:
-    return redirect(url_for("dashboard"))
+  name = model.authenticate(email, password)
+  if name:
+    return render_template("dashboard.html", name=name)
   flash("Password and Email invalid. Sucks to be you.")
   return render_template("login.html")
 
@@ -55,7 +55,15 @@ def register():
 
 @app.route('/dashboard')
 def dashboard():
-  return "logged in yay"
+  return render_template("dashboard.html")
+
+@app.route('/activity_settings')
+def activity_settings():
+  return "This is where you will set up activities"
+
+@app.route('/student_results')
+def student_results():
+  return "This is where you can see student's results"
 
 ###=========== API endpoints ===========###
 

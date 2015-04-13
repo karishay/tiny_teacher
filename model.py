@@ -32,8 +32,9 @@ def authenticate(email, password):
       Returns: boolean """
 
   teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='" + email + "' AND n.password ='" + password + "'  RETURN n")
+  teacher_name = teacher_node.records[0].n.properties["name"]
   if teacher_node.records:
     print "OMG there is a node with that password and email!"
-    return True
+    return teacher_name
   print "Whoops, empty records. You do not exist"
   return False
