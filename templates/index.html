@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
+<center><div>
+    <h2> Shutting up students since 2015 </h2><br>
+    <div class="medium primary btn">
+      <a href="{{ url_for('login_template') }}">Log In</a>
+    </div>
 
-
-<h3> Shutting up students since 2015 </h3>
-<div class="medium primary btn">
-  <a href="{{ url_for('login_template') }}">Log In</a>
-</div>
-
-<div class="medium primary btn">
-  <a href="{{ url_for('register') }}">Register</a>
-</div>
+    <div class="medium primary btn">
+      <a href="{{ url_for('register') }}">Register</a>
+    </div>
+</div></center>
 
 {% endblock %}

@@ -22,7 +22,19 @@ def register_teacher(name, email, password, school, class_subject):
   graph.create(new_teacher)
   return new_teacher.exists
 
+def create_activity(activity_name, settings, setting_presets, preview):
+  """ Description: Creates a new activity node
+      Params: Activity Name (string), Settings (dictionary), Setting Presets (dict of dicts),
+              Preview: (url to resource)
+      Returns: true if correctly added to graph"""
+  new_activity = Node("Activity", name=activity_name,
+                      settings=settings,
+                      preset=setting_presets,
+                      preview=preview)
+  graph.create(new_activity)
+  return new_activity.exists
 
+  
 ###============ Nodes and Relationship Access ===============###
 
 def authenticate(email, password):
@@ -38,3 +50,8 @@ def authenticate(email, password):
     return teacher_name
   print "Whoops, empty records. You do not exist"
   return False
+
+def look_up_possible_settings(activity):
+  """ Description: Given a specific activity, find all possible setting options.
+      Params: A specific actvity by name (string)
+      Returns: A dictionary object with all possible settings selections given a specific activity"""

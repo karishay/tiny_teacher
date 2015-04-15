@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block body %}
+
+<div class="row">
+  <div class="twelve columns">
+    <center><h2> Design A New Activity </h2></center>
+  </div>
+</div>
+
+<div class="row">
+  <div class="centered ten columns">
+    <center><h4> Activity Name </h4></center>
+    <div>
+    <form method="post">
+      <ul>
+        <li class="field">
+          <input class="input" type="text" placeholder="Such Name, Very Wow. Activity."></input>
+        </li>
+      </ul>
+    <center><h4> Settings </h4></center>
+    <p>Enter your settings and possible options for
+      settings in JSON format below. Be sure to use
+      <a href="http://jsonlint.com/"> JSONLint </a>
+      first to ensure that your file is correctly formatted. </p>
+      <ul>
+        <li class="field">
+          <textarea class="input textarea" placeholder="Input Formatted JSON Settings Here!"></textarea>
+        </li>
+      </ul>
+      <center><h4> Preview </h4></center>
+      <p> Insert url for preview gif </p>
+      <ul>
+        <li class="field">
+          <input class="input" type="text" placeholder="www.activitygif.com/yay"></input>
+        </li>
+      </ul>
+      <center><div class="medium primary btn">
+      <input type="submit">
+    </div></center>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

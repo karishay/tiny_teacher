@@ -1685,3 +1685,8 @@ table.rounded thead th, table.rounded thead td, table.rounded caption + tbody tr
 .ie8 .ttip:hover:before, .ie8 .ttip:hover:after { display: block; }
 
 .ie9 .radio.checked i, .ie9 .checkbox.checked i { top: 0; }
+
+.navbar { margin-bottom: 0px; padding: 0px; background: rgba(41, 128, 185, 0.75); }
+
+h1 { margin-top: -15px; cursor: pointer; -webkit-transform: scale(1); opacity: 1; transition: all 400ms ease; }
+h1.ptogg1.active { -webkit-transform: scale(0); opacity: 0; }

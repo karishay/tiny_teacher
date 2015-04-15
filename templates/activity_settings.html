@@ -5,8 +5,8 @@
 <br>
   {% for key, value in activities.iteritems() %}
   <div class="large primary btn">
-    <a href="{{ key }}">{{ key }} </a>
+    <a href="url_for(render_activity_settings({{ value[0] }}))">{{ key }} </a>
   </div>
-    <p> {{ value }} </p>
+    <p> {{ value[1] }} </p>
   {% endfor %}
 {% endblock %}

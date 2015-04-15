@@ -1,1 +1,18 @@
 // Your custom SCSS should be written here...
+.navbar {
+    margin-bottom: 0px;
+    padding:0px;
+    background: rgba(41,128,185,.75)
+}
+
+h1 {
+margin-top: -15px;
+    cursor: pointer;
+    -webkit-transform: scale(1);
+    opacity: 1;
+    transition: all 400ms ease;
+    &.ptogg1.active {
+        -webkit-transform: scale(0);
+        opacity: 0;
+    }
+}

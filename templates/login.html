@@ -1,24 +1,20 @@
 {% extends "base.html" %}
 {% block body %}
-<fieldset>
   <legend> Enter Your Log In Credentials </legend>
   <ul>
     <form method="post">
     <li class="field">
       <label class="inline" for="text1">Email</label>
-      <input class="wide text input" name="email" id="text1" type="text" placeholder="Email" />
+      <input class="wide text input" name="email" id="text1" type="email" placeholder="Email" />
     </li>
     <li class="field">
       <form method="post">
       <label class="inline" for="text2">Password</label>
-      <input class="wide text input" name="password" id="text2" type="text" placeholder="Password" />
+      <input class="wide text input" name="password" id="text2" type="password" placeholder="Password" />
     </li>
-    <input type="submit">
+    <div class="medium primary btn">
+      <input type="submit">
+    </div>
   </form>
-    <!-- <input type="text" name="email" placeholder="Email"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-<input type="submit">
-  </form> -->
   </ul>
-</fieldset>
 {% endblock %}

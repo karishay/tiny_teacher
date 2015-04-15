@@ -46,8 +46,11 @@
 
 
 <body>
-  <div>
-    <h1> TinyTeacher </h1>
+  <div class="row navbar" id="nav1">
+    <a class="toggle" gumby-trigger="#nav1 > ul" href="#"><i class="icon-menu"></i></a>
+    <ul class="twelve columns">
+      <li><h1> TinyTeacher </h1></li>
+    </ul>
   </div>
   <div>
     {% with messages = get_flashed_messages() %}
@@ -60,9 +63,11 @@
       {% endif %}
     {% endwith %}
   </div>
-  <div>
-    {% block body %}
-    {% endblock %}
+  <div class="row">
+    <div class="centered twelve columns">
+      {% block body %}
+      {% endblock %}
+    </div>
   </div>
 
 

@@ -60,14 +60,22 @@ def dashboard():
 @app.route('/activity_settings', methods=["GET"])
 def activity_settings():
   activities={"Phone Push":
-        "Ever wanted to push your phone? There's an app for that!", "Nic is Awesome":
-        "This activity proves scientifically the objective awesomeness that is Nic",
-        "Operation Badass": "If I told you the description of this activity I'd have to kill you."}
+        ("phone_push","Ever wanted to push your phone? There's an app for that!"), "Nic is Awesome":
+        ("nic_is_awesome","This activity proves scientifically the objective awesomeness that is Nic"),
+        "Operation Badass": ("operation_badass","If I told you the description of this activity I'd have to kill you.")}
   return render_template("activity_settings.html", activities=activities)
+
+@app.route('/<activity>')
+def render_activity_settings(activity):
+  #activity_specific_settings = Model.look_up_possible_settings(activity)
+  #return render_template("activity.html", activity_settings=activity_specific_settings)
+  return "Yay, activity is %s" % activity
 
 @app.route('/student_results')
 def student_results():
   return "This is where you can see student's results"
+
+
 
 ###=========== API endpoints ===========###
 
@@ -79,6 +87,18 @@ def teachers_json():
 @app.route('/activity')
 def activity_json():
   return render_template("activity.json")
+
+
+
+###===========Admin Interface===========###
+
+#TODO: limit access to admins and add admin login
+
+@app.route('/create_activity')
+def create_activity():
+  return render_template("create_activity.html")
+
+
 
 
 ###=====================================###
