@@ -52,19 +52,20 @@
       <li><h1> TinyTeacher </h1></li>
     </ul>
   </div>
-  <div>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul class=flashes>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-  </div>
   <div class="row">
     <div class="centered twelve columns">
+
+      <div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+      </div>
       {% block body %}
       {% endblock %}
     </div>

@@ -34,7 +34,12 @@ def create_activity(activity_name, settings, setting_presets, preview):
   graph.create(new_activity)
   return new_activity.exists
 
-  
+def create_teacher_activity_rel(teacher, activity, settings, class_subject, active):
+  """ Description:  Given a teacher and an activity, create a 'Teacher's Activity'
+                    relationship storing all setting configurations, associated class
+                    and active status
+      Params: teacher (string), activity (name of activity- string), settings (dictionary of selected settings), class, active"""
+
 ###============ Nodes and Relationship Access ===============###
 
 def authenticate(email, password):
@@ -43,7 +48,8 @@ def authenticate(email, password):
       Params: Email and Password from form
       Returns: boolean """
 
-  teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='" + email + "' AND n.password ='" + password + "'  RETURN n")
+  teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='"
+                + email + "' AND n.password ='" + password + "'  RETURN n")
   teacher_name = teacher_node.records[0].n.properties["name"]
   if teacher_node.records:
     print "OMG there is a node with that password and email!"
@@ -52,6 +58,15 @@ def authenticate(email, password):
   return False
 
 def look_up_possible_settings(activity):
+  #TODO: Build this
   """ Description: Given a specific activity, find all possible setting options.
       Params: A specific actvity by name (string)
-      Returns: A dictionary object with all possible settings selections given a specific activity"""
+      Returns: A dictionary object with all possible settings selections given
+              a specific activity"""
+
+
+def find_queued_activity_settings(teacher):
+  #TODO: Build this
+  """ Description: Given a teacher, find the queued up active activity settings
+      Params: A specific teacher (string)
+      Returns: A json object of configured settings for a given activity"""

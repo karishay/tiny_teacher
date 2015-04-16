@@ -9,8 +9,12 @@ import model
 app = Flask(__name__)
 app.config.from_object(config)
 
-
+###=====================================###
 ###========= Teacher Interface =========###
+###=====================================###
+
+###= Login and Registration ============###
+
 
 @app.route('/')
 def index():
@@ -57,6 +61,10 @@ def register():
 def dashboard():
   return render_template("dashboard.html")
 
+
+###= Activity Manipulation ============###
+
+
 @app.route('/activity_settings', methods=["GET"])
 def activity_settings():
   activities={"Phone Push":
@@ -76,27 +84,49 @@ def student_results():
   return "This is where you can see student's results"
 
 
-
+###=====================================###
 ###=========== API endpoints ===========###
+###=====================================###
+
 
 
 @app.route('/teachers')
 def teachers_json():
   return render_template("teachers.json")
 
-@app.route('/activity')
-def activity_json():
+@app.route('/teachers/<teacher>')
+def activity_json(teacher):
+  #TODO: call model.find_teacher(teacher) to return active settings
+  #for queued activity for the teacher
   return render_template("activity.json")
 
 
-
+###=====================================###
 ###===========Admin Interface===========###
+###=====================================###
+
 
 #TODO: limit access to admins and add admin login
 
-@app.route('/create_activity')
-def create_activity():
+@app.route('/create_activity', methods=["GET"])
+def create_activity_template():
   return render_template("create_activity.html")
+
+@app.route('/create_activity', methods=["POST"])
+def create_activity():
+  #TODO: check validity
+  form = request.form
+  name = form["activity_name"]
+  settings = form["settings"]
+  presets = "Presets will be dealt with later, when we care more."
+  preview = form["preview"]
+
+  new_activity = model.create_activity(name, settings, presets, preview)
+  if new_activity:
+    flash("Sucessfully created new activity, now log in as a teacher to set it up!")
+    return redirect(url_for("login_template"))
+  flash("Activity was not created sucessfully, double check your JSON and try again!")
+  return redirect(url_for("create_activity"))
 
 
 
