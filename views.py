@@ -111,7 +111,7 @@ def activity_json(teacher):
     return render_template("activity.json")
   if teacher == "Shannon Burns":
     return render_template("decay_dice.json")
-  return "Sorry, that teacher doesn't have any activities queued up"
+  return "{'Sorry, that teacher doesn't have any activities queued up'}"
 
 
 ###=====================================###
