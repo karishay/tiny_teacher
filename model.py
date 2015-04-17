@@ -38,7 +38,21 @@ def create_teacher_activity_rel(teacher, activity, settings, class_subject, acti
   """ Description:  Given a teacher and an activity, create a 'Teacher's Activity'
                     relationship storing all setting configurations, associated class
                     and active status
-      Params: teacher (string), activity (name of activity- string), settings (dictionary of selected settings), class, active"""
+      Params: teacher (string), activity (name of activity- string),
+                    settings (dictionary of selected settings), class_subject (string),
+                    active (boolean)
+      Returns: Boolean if created sucessfully or not"""
+  #find teacher node
+  teacher_node = find_teacher_node(teacher)
+
+  #bind teacher node to remote graph
+  #find activity node
+  #bind activity node
+  #teacher_configured_activity = Relationship(teacher, "CONFIGURED", activity,
+                                              #settings=settings, class_subject=class_subject,
+                                              #active=active)
+  return True
+  return False
 
 ###============ Nodes and Relationship Access ===============###
 
@@ -51,10 +65,29 @@ def authenticate(email, password):
   teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='"
                 + email + "' AND n.password ='" + password + "'  RETURN n")
   teacher_name = teacher_node.records[0].n.properties["name"]
-  if teacher_node.records:
+  if bool(teacher_node.records):
     print "OMG there is a node with that password and email!"
     return teacher_name
   print "Whoops, empty records. You do not exist"
+  return False
+
+def find_teacher_node(teacher):
+  """ Description: Given a teacher's name, return the teacher node
+      Params: teacher name (string)
+      Returns: teacher node object if sucessful, otherwise false"""
+  teacher_node = graph.find("Teacher", property_key="name", property_value=teacher)
+  return teacher_node
+
+  # teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.name ='"
+  #             + teacher + "' RETURN n")
+  # teacher_name = teacher_node.records[0].n.properties["name"]
+
+  # teacher_node = Node("Teacher", name=teacher)
+  # teacher_node.bind("localhost:7474/")
+  # return teacher_node.properties.keys
+
+  if bool(teacher_node.records) :
+    return teacher_node
   return False
 
 def look_up_possible_settings(activity):

@@ -70,7 +70,8 @@ def activity_settings():
   activities={"Phone Push":
         ("phone_push","Ever wanted to push your phone? There's an app for that!"), "Nic is Awesome":
         ("nic_is_awesome","This activity proves scientifically the objective awesomeness that is Nic"),
-        "Operation Badass": ("operation_badass","If I told you the description of this activity I'd have to kill you.")}
+        "Operation Badass": ("operation_badass",
+        "If I told you the description of this activity I'd have to kill you.")}
   return render_template("activity_settings.html", activities=activities)
 
 @app.route('/<activity>')
@@ -78,6 +79,14 @@ def render_activity_settings(activity):
   #activity_specific_settings = Model.look_up_possible_settings(activity)
   #return render_template("activity.html", activity_settings=activity_specific_settings)
   return "Yay, activity is %s" % activity
+
+
+@app.route('/test/')
+def test():
+  teacher = "Shannon Burns"
+  shannon_node = model.find_teacher_node(teacher)
+  print (dir(shannon_node), type(shannon_node))
+  return ("This is shannon node: ", str(bool(shannon_node)))
 
 @app.route('/student_results')
 def student_results():
@@ -98,7 +107,11 @@ def teachers_json():
 def activity_json(teacher):
   #TODO: call model.find_teacher(teacher) to return active settings
   #for queued activity for the teacher
-  return render_template("activity.json")
+  if teacher == "Nic Harrigan":
+    return render_template("activity.json")
+  if teacher == "Shannon Burns":
+    return render_template("decay_dice.json")
+  return "Sorry, that teacher doesn't have any activities queued up"
 
 
 ###=====================================###
