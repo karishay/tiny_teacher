@@ -44,31 +44,17 @@ def authenticate(email, password):
 
   teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.email ='"
                 + email + "' AND n.password ='" + password + "'  RETURN n")
-  teacher_name = teacher_node.records[0].n.properties["name"]
   if bool(teacher_node.records):
-    print "OMG there is a node with that password and email!"
+    teacher_name = teacher_node.records[0].n.properties["name"]
     return teacher_name
-  print "Whoops, empty records. You do not exist"
   return False
 
 def find_teacher_node(teacher):
   """ Description: Given a teacher's name, return the teacher node
       Params: teacher name (string)
       Returns: teacher node object if sucessful, otherwise false"""
-  # teacher_node = graph.cypher.execute("MATCH (n:Teacher) WHERE n.name ='"
-  #             + teacher + "' RETURN n")
-  # teacher_name = teacher_node.records[0].n.properties["name"]
-  #
-  # teacher_node = Node("Teacher", name=teacher)
-  # print (teacher_node, bool(teacher_node))
-  # print dir(teacher_node)
-  # print teacher_node.exists
-  # teacher_node.bind("http://localhost:7474/db/data", metadata=None)
-  # return teacher_node.properties.keys
 
   teacher_node = graph.find_one("Teacher", property_key="name", property_value=teacher)
-  # teacher_node.bind("http://localhost:7474/db/data", metadata=None)
-  # print ("teacher_node exists and is :", teacher_node)
   if bool(teacher_node):
     return teacher_node
   return False
@@ -78,8 +64,6 @@ def find_activity_node(activity):
       Params: teacher name (string)
       Returns: teacher node object if sucessful, otherwise false"""
   activity_node = graph.find_one("Activity", property_key="name", property_value=activity)
-  # activity_node.bind("http://localhost:7474/db/data", metadata=None)
-  # print ("activity_node exists and is :", activity_node)
   if bool(activity_node):
     return activity_node
   return False
@@ -111,30 +95,16 @@ def create_teacher_activity_rel(teacher, activity, settings, class_subject, acti
                     active (boolean)
       Returns: Boolean if created sucessfully or not"""
 
-  #find activity node
   activity_node = find_activity_node(activity)
-  print ("This is an activity name:", activity_node["name"])
-  print ("This should be a fucking activity id: ", activity_node._id)
-  #find teacher node
   teacher_node = find_teacher_node(teacher)
-  print ("This should be a fucking teacher id: ", teacher_node._id)
-  print ("This is a teacher's name", teacher_node["name"])
-  print "Why isnt this printing????"
 
-
-
-  #bind activity node
-  teacher_configured_activity = Relationship(teacher_node, "CONFIGURED", activity_node,
+  configured_rel = Relationship(teacher_node, "CONFIGURED", activity_node,
                                               settings=settings, class_subject=class_subject,
                                               active=active)
-  pants = graph.create_unique(teacher_configured_activity)
+  configured_relationship = graph.create_unique(configured_rel)
 
-  # then add the properties , {"settings":settings, "class_subject":class_subject,"active":active} ),
-  #the push
-
-  # print (teacher_configured_activity.exists, "Configured??")
-  if pants:
-    print pants[0]
+  if configured_relationship:
+    print configured_relationship[0]
     return True
   return False
 

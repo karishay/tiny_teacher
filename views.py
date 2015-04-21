@@ -66,7 +66,7 @@ def dashboard():
 
 
 @app.route('/activity_settings', methods=["GET"])
-def activity_settings():
+def activity_settings():  
   activities={"Phone Push":
         ("phone_push","Ever wanted to push your phone? There's an app for that!"), "Nic is Awesome":
         ("nic_is_awesome","This activity proves scientifically the objective awesomeness that is Nic"),
