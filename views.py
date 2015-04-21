@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, flash, redirect, url_for
+from flask import Flask, render_template, request, session, flash, redirect, url_for, json
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 
 import os
@@ -84,9 +84,39 @@ def render_activity_settings(activity):
 @app.route('/test/')
 def test():
   teacher = "Shannon Burns"
-  shannon_node = model.find_teacher_node(teacher)
-  print (dir(shannon_node), type(shannon_node))
-  return ("This is shannon node: ", str(bool(shannon_node)))
+  activity = "DecayDice"
+  settings = {
+      "teacher_name" : "Shannon Burns",
+      "activity_name": "DecayDice",
+      "selected_settings": {
+          "preset": [],
+          "display_data": {
+              "initial_velocity": True,
+              "time": True,
+              "distance": False,
+              "deceleration": False
+          },
+          "table_data": {
+              "initial_velocity": True,
+              "time": False,
+              "distance": True,
+              "deceleration": False
+          },
+          "include_blank_columns": False,
+          "display_best_fit": False
+        }
+  }
+
+  settings_string = json.dumps(settings)
+
+  print ("This is settings:", settings_string)
+    #Settings will be gotten from the form
+  class_subject = ["Physics", "Spring 2015"]
+  active = True
+  relationship = model.create_teacher_activity_rel(teacher, activity, settings_string, class_subject, active)
+  if relationship:
+    return ("The relationship was created: ", relationship)
+  return ("relationship was not created :(")
 
 @app.route('/student_results')
 def student_results():
