@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, flash, redirect, url_for, json
+from flask import Flask, render_template, request, session, flash, redirect, url_for, json, jsonify
 from flask.ext.login import LoginManager, login_required, login_user, current_user
 
 import os
@@ -66,7 +66,7 @@ def dashboard():
 
 
 @app.route('/activity_settings', methods=["GET"])
-def activity_settings():  
+def activity_settings():
   activities={"Phone Push":
         ("phone_push","Ever wanted to push your phone? There's an app for that!"), "Nic is Awesome":
         ("nic_is_awesome","This activity proves scientifically the objective awesomeness that is Nic"),
@@ -83,27 +83,45 @@ def render_activity_settings(activity):
 
 @app.route('/test/')
 def test():
+  ###------=============================================-------###
+  ######## testing look up possible settings by activity #########
+  ###------=============================================-------###
+  #TODO: Have Nic test if this needs to be unwrapped and rewrapped
+  activity = "DecayDice"
+  settings = model.look_up_possible_settings(activity)
+
+  if settings:
+    print "Ohai I am trying to load Json, Did it work?"
+    return settings
+  return "No active configured activites right now :("
+
+@app.route('/test_configure/')
+def test_configure():
+  ###------=============================================-------###
+  ######### testing creation of Configured Relationships #########
+  ###------=============================================-------###
   teacher = "Shannon Burns"
   activity = "DecayDice"
   settings = {
       "teacher_name" : "Shannon Burns",
       "activity_name": "DecayDice",
+      "preset": ["a","b","c"],
       "selected_settings": {
-          "preset": [],
+          "preset": ["a","b","c"],
           "display_data": {
-              "initial_velocity": True,
-              "time": True,
-              "distance": False,
-              "deceleration": False
+              "initial_velocity": "true",
+              "time": "true",
+              "distance": "false",
+              "deceleration": "false"
           },
           "table_data": {
-              "initial_velocity": True,
-              "time": False,
-              "distance": True,
-              "deceleration": False
+              "initial_velocity": "true",
+              "time": "false",
+              "distance": "true",
+              "deceleration": "false"
           },
-          "include_blank_columns": False,
-          "display_best_fit": False
+          "include_blank_columns": "false",
+          "display_best_fit": "false"
         }
   }
 
@@ -117,6 +135,12 @@ def test():
   if relationship:
     return ("The relationship was created: ", relationship)
   return ("relationship was not created :(")
+
+@app.route('/test_queued_activities')
+def test_queued_activities():
+  teacher = "Shannon Burns"
+  queued_activity = model.find_queued_activity_settings(teacher)
+  return queued_activity
 
 @app.route('/student_results')
 def student_results():

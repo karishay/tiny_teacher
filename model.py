@@ -75,6 +75,12 @@ def look_up_possible_settings(activity):
       Returns: A dictionary object with all possible settings selections given
               a specific activity"""
 
+  #find activity
+  activity_node = find_activity_node(activity)
+  #find the settings property
+  # print activity_node["settings"]
+  return activity_node["settings"]
+
 
 def find_queued_activity_settings(teacher):
   #TODO: Build this
@@ -82,6 +88,15 @@ def find_queued_activity_settings(teacher):
       Params: A specific teacher (string)
       Returns: A json object of configured settings for a given activity"""
 
+  teacher_node = find_teacher_node(teacher)
+  print teacher_node["active_activities"]
+  if teacher_node["active_activities"]:
+    #save the activity name and configuration
+    activity_name = teacher_node["active_activities"][0]
+    activity_configuration = teacher_node["active_activities"][1]
+    print activity_configuration
+    return activity_configuration
+  return "No queued activities"
 
 ###============ Relationship  Creation ===============###
 
@@ -104,6 +119,14 @@ def create_teacher_activity_rel(teacher, activity, settings, class_subject, acti
   configured_relationship = graph.create_unique(configured_rel)
 
   if configured_relationship:
+    #if the configured relationship is active
+    if configured_relationship[0]["active"]:
+      #add activity name to the teacher's active activities
+      teacher_node["active_activities"] = [activity_node["name"], configured_relationship[0]["settings"]]
+      #add configured settings to active queue on teacher
+      graph.push(teacher_node)
+
+      #push to remote entity
     print configured_relationship[0]
     return True
   return False
