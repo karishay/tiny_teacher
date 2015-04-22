@@ -1,0 +1,22 @@
+{
+  "name": "tiny_teacher",
+  "version": "0.0.0",
+  "description": "web interface for tiny teacher mobile app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/karishay/tiny_teacher.git"
+  },
+  "author": "kari.shay@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karishay/tiny_teacher/issues"
+  },
+  "homepage": "https://github.com/karishay/tiny_teacher",
+  "devDependencies": {
+    "bower": "^1.4.1"
+  }
+}

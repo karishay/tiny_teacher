@@ -1,0 +1,20 @@
+{
+  "name": "tiny_teacher",
+  "version": "0.0.0",
+  "homepage": "https://github.com/karishay/tiny_teacher",
+  "authors": [
+    "Shannon Burns <kari.shay@gmail.com>"
+  ],
+  "description": "web interface for tiny teacher mobile app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.13.2"
+  }
+}
