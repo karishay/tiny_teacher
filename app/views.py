@@ -142,8 +142,8 @@ def test_queued_activities():
   queued_activity = model.find_queued_activity_settings(teacher)
   return queued_activity
 
-@app.route('/display_settings_options/')
-def display_possible_settings():
+@app.route('/display_settings_options')
+def display_settings_options():
   return render_template("display_possible_settings.html")
 
 @app.route('/student_results')
