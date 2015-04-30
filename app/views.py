@@ -144,7 +144,13 @@ def test_queued_activities():
 
 @app.route('/display_settings_options')
 def display_settings_options():
-  return render_template("display_possible_settings.html")
+  question_group = [
+      {"Forget-Me-Now":{"description": "Say goodbye to these because it's the last time! That's why you always leave a note! I've opened a door here that I regret. Marry me. He'll want to use your yacht, and I don't want this thing smelling like fish. I care deeply for nature.","time": 3, "materials": None}},
+      {"Top Banana":{"description" : "A flower in my garden, a mystery in my panties. There are dozens of us! Dozens! If mother sees this, she will blow a cow. No, no, it's pronounced a-nal-ra-pist. It wasn't really the pronunciation that bothered me.", "time": 2, "materials": "banana"}},
+      {"NO TOUCHING!":{"description" : "We need a name. Maybe 'Operation Hot Mother.'' No, let's try to top that. (They never did.) Please refrain from Mayoneggs during this salmonella scare.", "time": 2, "materials": None}}
+  ]
+
+  return render_template("display_possible_settings.html", questions=question_group)
 
 @app.route('/student_results')
 def student_results():
