@@ -1,0 +1,27 @@
+#activate server:
+
+get into the local directory
+
+`cd src/tiny_teacher`
+
+turn on the neo4j database
+
+`neo4j start`
+
+enter the app directory
+
+`cd app`
+
+activate the virtual env
+
+`source ../env/bin/activate`
+
+then turn on the python process
+
+`python views.py`
+
+open up a new terminal tab (cmd t) and create an ngrok tunnel
+
+`ngrok -subdomain=tiny_teacher 5050`
+
+[check processes are up and running](localhost:5050)
