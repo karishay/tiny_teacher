@@ -4,6 +4,8 @@
 <script src="static/js/jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
 <script src="static/js/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 
+<!-- ============ Name of Activity [Heading] ============= -->
+
 <div class="row" >
   <div class="twelve columns">
     <center><h2> PhonePush Settings Configuration</h2></center>
@@ -29,16 +31,22 @@
 
       <div class="row">
         <div class="pull_one eight columns">
+          <!--TODO: Add functionaility to dynamically load descriptions here  -->
           <h4> Preset description will display dynamically here. Look, this is a description. WOW :)</h4>
         </div>
       </div>
       <br>
 
+<!-- =================================================== -->
+<!-- ============== Preset: Questions ================== -->
+<!-- =================================================== -->
+
+
       <div>
         <table class="striped rounded sortable" i>
           <thead>
             <tr>
-              <th>Select</th>
+              <th>Selected</th>
               <th>Question Settings</th>
               <th>Time</th>
             </tr>
@@ -50,11 +58,26 @@
                     <input name="checkbox[]" id="check1" value="1" type="checkbox" checked="checked">
                   </td>
                   <td>
+                    <div class="modal" id="modal1">
+                      <div class="content">
+                        <a class="close switch" gumby-trigger="|#modal1"><i class="icon-cancel" /></i></a>
+                        <div class="row">
+                          <div class="ten columns centered text-center">
+                            <h2>Question Settings:</h2>
+                            <p>What is the air-speed velocity of an unlaiden swallow?</p>
+                            <p class="btn primary medium oval">
+                              <a href="#" class="switch" gumby-trigger="|#modal1"> Set</a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <u>Title:</u> {{ key }}<br>
                     <u>Total Questions in Set:</u> 3 <br>
                     <u>Description:</u> {{ value['description'] }}<br>
                     <u>Prequisite Knowledge:</u> Quantum Physics, Baking<br>
-                    <u>Materials Needed:<u>{{ value['materials'] }}
+                    <u>Materials Needed:</u> {{ value['materials'] }}<br>
+                    <p class="btn small primary "><a href="#" class="switch" gumby-trigger="#modal1">Advanced Question Settings</a></p>
                     </td>
                   <td>5 mins</td>
                 {% endfor %}
@@ -64,12 +87,17 @@
       </div>
 
             <div class="row">
-              <div class="eight columns">
+              <div class="seven columns">
                 <h3>Date Active:</h3>
                 <input type="text" name="date" id="date">
               </div>
-              <div class="push_two one columns">
-                <div class="large primary btn">
+              <div class="push_one one columns">
+                <div class="large oval primary btn">
+                  <a href="#">Save</a>
+                </div>
+              </div>
+              <div class="push_one two columns">
+                <div class="large oval primary btn">
                   <a href="#">Activate</a>
                 </div>
               </div>
